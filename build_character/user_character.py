@@ -3,7 +3,7 @@ import numpy as np
 
 
 # 读入数据集
-df=pd.read_csv('douyin_dataset.csv')
+df=pd.read_csv('../douyin_dataset.csv')
 user_df = pd.DataFrame()
 # 将所有用户的uid提取为uid列
 user_df['uid'] = df.groupby('uid')['like'].count().index.tolist()
