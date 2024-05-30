@@ -78,3 +78,34 @@ def draw(k, sse, sc):
         )
     )
     return chart
+
+# 模型训练
+# user_score = km(user_data, '用户')
+
+# 选择聚类k值，k值是从2到9，因为k值越大，对应的聚类精度越高，但是计算复杂度也会增加
+# user_score = joblib.load(f"用户聚类指标.score")
+# # 着重看sc曲线，因为sc体现了聚类效果
+# chart = draw([str(x) for x in range(2,10)], user_score['sse'], user_score['sc'])
+# chart.render("用户聚类指标.html")
+
+# 聚类结果
+# user_km = joblib.load(f'用户4聚类.model')  # 加载k=4的训练完毕的模型
+# user_centers = pd.DataFrame(user_km.cluster_centers_, columns=user_feature.columns)  # 构造结果的数据结构框架
+# # 首先用模型进行聚类，然后对每个聚类进行计数，然后将每个聚类的人数包装为一个Series对象，并作为新的一列添加到user_centers中
+# user_centers['人数'] = pd.Series(user_km.predict(user_data)).value_counts()
+# print(user_centers)
+
+# 作者模型训练
+# author_score = km(author_data, '作者')
+
+# 聚类K值选择
+# author_score = joblib.load(f'作者聚类指标.score')
+# chart = draw([str(x) for x in range(2, 10)], author_score['sse'], author_score['sc'])
+# chart.render("作者聚类指标.html")
+
+# 聚类效果
+author_km = joblib.load(f'作者8聚类.model')
+author_centers = pd.DataFrame(author_km.cluster_centers_, columns=author_feature.columns)
+author_centers['人数'] = pd.Series(author_km.predict(author_data)).value_counts()
+print(author_centers)
+
